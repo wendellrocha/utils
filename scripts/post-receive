@@ -1,0 +1,2 @@
+#!/bin/sh
+python /home/$USER/backups/backups.git/hooks/post-receive.py
