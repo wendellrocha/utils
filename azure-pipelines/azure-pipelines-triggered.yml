@@ -1,0 +1,25 @@
+trigger:
+  - dev
+
+pool:
+  vmImage: "ubuntu-latest"
+strategy:
+  matrix:
+    node_8_x:
+      node_version: 8.16.1
+
+steps:
+  - script: sudo npm install -g mup
+    displayName: "Instalando o MUP"
+  - script: |
+      echo "Instalando o Meteor"
+      curl https://install.meteor.com/ | sh
+      export PATH=$PATH:$HOME/.meteor
+      echo "Instalando as dependências do projeto"
+      meteor npm install
+      echo "Configurando o mup"
+      cd .deploy
+      mup setup
+      echo "Iniciando o deploy"
+      mup deploy
+      echo "Deploy finalizado"
