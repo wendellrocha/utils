@@ -17,8 +17,8 @@ db.pessoa.aggregate([
     },
     {
         $project: {
+            ordem: { $dateToString: { format: "%Y%m%d", date: "$versoes.modifiedAt" } },
             alteracoes: {
-                _id: '$versoes._id',
                 email: '$versoes.email',
                 nome: '$versoes.nome',
                 sobrenome: '$versoes.sobrenome',
@@ -29,14 +29,20 @@ db.pessoa.aggregate([
                 genero: '$versoes.genero',
                 ativo: '$versoes.ativo',
                 createdAt: { $dateToString: { format: "%d/%m/%Y", date: "$versoes.createdAt" } },
-                modifiedAt: { $dateToString: { format: "%d/%m/%Y", date: "$versoes.modifiedAt" } }
+                modifiedAt: { $dateToString: { format: "%d/%m/%Y", date: "$versoes.modifiedAt" } },
             }
         }
     },
     {
         $group: {
             _id: '$alteracoes.modifiedAt',
+            ordem: { $last: '$ordem' },
             alteracoes: { $push: '$alteracoes' }
+        }
+    },
+    {
+        $sort: {
+            'ordem': -1
         }
     }
 ])
