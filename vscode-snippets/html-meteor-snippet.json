@@ -1,0 +1,10 @@
+{
+    "blaze template": {
+        "prefix": "blazetemplate",
+        "body": [
+            "<template name='$TM_FILENAME_BASE'>",
+            "</template>"
+        ],
+        "description": "Create blaze template"
+    }
+}

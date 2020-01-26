@@ -1,81 +1,83 @@
 {
-    "meteor method insert into collection": {
-        "prefix": "addmethod",
-        "body": [
-            "'${1:name}.insert'(${2:variable}) {",
-            "        if (this.userId) {",
-            "            try {",
-            "                check(${2:variable}, Object);",
-            "",
-            "                let id = ${3:collection}.insert(${2:variable});",
-            "",
-            "                return id;",
-            "            } catch (error) {",
-            "                throw new Meteor.Error(400, 'Algo deu errado, tente novamente.');",
-            "            }",
-            "        } else {",
-            "            throw new Meteor.Error(401, 'Não autorizado.');",
-            "        }",
-            "}"
-        ],
-        "description": "Meteor method for insert document into mongo collection"
-    },
-    "meteor method update collection": {
-        "prefix": "updatemethod",
-        "body": [
-            "'${1:name}.update'(${2:variable}, ${3:variale}) {",
-            "        if (this.userId) {",
-            "            try {",
-            "                check(${2:variable}, Object);",
-            "                check(${3:variable}, String);",
-            "",
-            "                let id = ${4:collection}.update({_id:${3:variable}}, { \\$set: ${2:variable}});",
-            "",
-            "                return id;",
-            "            } catch (error) {",
-            "                throw new Meteor.Error(400, 'Algo deu errado, tente novamente.');",
-            "            }",
-            "        } else {",
-            "            throw new Meteor.Error(401, 'Não autorizado.');",
-            "        }",
-            "}"
-        ],
-        "description": "Meteor method for update document into mongo collection"
-    },
-    "meteor method delete collection": {
-        "prefix": "deletemethod",
-        "body": [
-            "'${1:name}.remove'(${2:variable}) {",
-            "        if (this.userId) {",
-            "            try {",
-            "                check(${2:variable}, String);",
-            "",
-            "                let id = ${3:collection}.remove({_id:${2:variable}});",
-            "",
-            "                return id;",
-            "            } catch (error) {",
-            "                throw new Meteor.Error(400, 'Algo deu errado, tente novamente.');",
-            "            }",
-            "        } else {",
-            "            throw new Meteor.Error(401, 'Não autorizado.');",
-            "        }",
-            "}"
-        ],
-        "description": "Meteor method for remove document into mongo collection"
-    },
-    "blaze template functions": {
-        "prefix": "templatefunctions",
-        "body": [
-            "Template.$TM_FILENAME_BASE.onCreated(function() {});",
-            "",
-            "Template.$TM_FILENAME_BASE.helpers({});",
-            "",
-            "Template.$TM_FILENAME_BASE.events({});",
-            "",
-            "Template.$TM_FILENAME_BASE.onRendered(function() {});",
-            "",
-            "Template.$TM_FILENAME_BASE.onDestroyed(function() {});",
-        ],
-        "description": "Generate blaze template functions"
-    }
+	"meteor method insert into collection": {
+		"prefix": "addmethod",
+		"body": [
+			"'${1:name}.insert'(${2:variable}) {",
+			"        if (this.userId) {",
+			"            try {",
+			"                check(${2:variable}, Object);",
+			"",
+			"                let id = ${3:collection}.insert(${2:variable});",
+			"",
+			"                return id;",
+			"            } catch (error) {",
+			"                throw new Meteor.Error(400, 'Algo deu errado, tente novamente.');",
+			"            }",
+			"        } else {",
+			"            throw new Meteor.Error(401, 'Não autorizado.');",
+			"        }",
+			"}"
+		],
+		"description": "Meteor method for insert document into mongo collection"
+	},
+	"meteor method update collection": {
+		"prefix": "updatemethod",
+		"body": [
+			"'${1:name}.update'(${2:variable}, ${3:variale}) {",
+			"        if (this.userId) {",
+			"            try {",
+			"                check(${2:variable}, Object);",
+			"                check(${3:variable}, String);",
+			"",
+			"                let id = ${4:collection}.update({_id:${3:variable}}, { \\$set: ${2:variable}});",
+			"",
+			"                return id;",
+			"            } catch (error) {",
+			"                throw new Meteor.Error(400, 'Algo deu errado, tente novamente.');",
+			"            }",
+			"        } else {",
+			"            throw new Meteor.Error(401, 'Não autorizado.');",
+			"        }",
+			"}"
+		],
+		"description": "Meteor method for update document into mongo collection"
+	},
+	"meteor method delete collection": {
+		"prefix": "deletemethod",
+		"body": [
+			"'${1:name}.remove'(${2:variable}) {",
+			"        if (this.userId) {",
+			"            try {",
+			"                check(${2:variable}, String);",
+			"",
+			"                let id = ${3:collection}.remove({_id:${2:variable}});",
+			"",
+			"                return id;",
+			"            } catch (error) {",
+			"                throw new Meteor.Error(400, 'Algo deu errado, tente novamente.');",
+			"            }",
+			"        } else {",
+			"            throw new Meteor.Error(401, 'Não autorizado.');",
+			"        }",
+			"}"
+		],
+		"description": "Meteor method for remove document into mongo collection"
+	},
+	"blaze template functions": {
+		"prefix": "templatefunctions",
+		"body": [
+			"import './$TM_FILENAME_BASE.html';",
+			"",
+			"Template.$TM_FILENAME_BASE.onCreated(function() {});",
+			"",
+			"Template.$TM_FILENAME_BASE.helpers({});",
+			"",
+			"Template.$TM_FILENAME_BASE.events({});",
+			"",
+			"Template.$TM_FILENAME_BASE.onRendered(function() {});",
+			"",
+			"Template.$TM_FILENAME_BASE.onDestroyed(function() {});",
+		],
+		"description": "Generate blaze template functions"
+	}
 }
