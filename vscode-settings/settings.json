@@ -1,0 +1,30 @@
+{
+    "editor.fontSize": 12,
+    "editor.fontFamily": "Fira Code",
+    "editor.fontLigatures": true,
+    "editor.renderLineHighlight": "gutter",
+    "html.format.indentInnerHtml": true,
+    "terminal.integrated.fontSize": 12,
+    "editor.tabSize": 4,
+    "files.maxMemoryForLargeFilesMB": 4096,
+    "html.format.enable": false,
+    "terminal.integrated.rendererType": "experimentalWebgl",
+    "explorer.confirmDragAndDrop": false,
+    "window.zoomLevel": 0,
+    "workbench.colorTheme": "Andromeda Italic Bordered",
+    "team.showWelcomeMessage": false,
+    "editor.minimap.enabled": false,
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "[javascript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "[html]": {
+        "editor.defaultFormatter": "HookyQR.beautify"
+    },
+    "editor.renderWhitespace": "boundary",
+    "editor.wordWrap": "on",
+    "telemetry.enableCrashReporter": false,
+    "telemetry.enableTelemetry": false,
+    "workbench.startupEditor": "newUntitledFile",
+}
