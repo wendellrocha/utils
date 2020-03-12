@@ -1,7 +1,7 @@
 db.denuncia.aggregate([
     {
         $match: {
-            _id: id
+            _id: 'gwafQyoLS9TjMBxty'
         }
     },
     {
@@ -11,6 +11,9 @@ db.denuncia.aggregate([
             foreignField: 'id_denuncia',
             as: 'interacoes'
         }
+    },
+    {
+        $unwind: '$interacoes'
     },
     {
         $lookup: {
@@ -26,8 +29,9 @@ db.denuncia.aggregate([
     {
         $project: {
             _id: 1,
-            interacoes: 1,
-            pessoa: {
+            'interacoes.motivo': 1,
+            'interacoes.createdAt': 1,
+            'interacoes.pessoa': {
                 nome: { $concat: ['$pessoa.nome', ' ', '$pessoa.sobrenome'] },
                 telefone: {
                     $cond: {
@@ -69,8 +73,7 @@ db.denuncia.aggregate([
     {
         $group: {
             _id: '$_id',
-            interacoes: { $last: '$interacoes' },
-            pessoa: { $push: '$pessoa' }
+            interacoes: { $push: '$interacoes' }
         }
     }
 ])
