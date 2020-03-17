@@ -7,7 +7,7 @@
 			"            try {",
 			"                check(${2:variable}, Object);",
 			"",
-			"                return  _insert${1:name}(${2:variable});",
+			"                return  _insert${3:variable}(${2:variable});",
 			"            } catch (error) {",
 			"                throw new Meteor.Error(400, 'Algo deu errado, tente novamente.');",
 			"            }",
@@ -27,7 +27,7 @@
 			"                check(${2:variable}, Object);",
 			"                check(${3:variable}, String);",
 			"",
-			"                return _update${1:name}(${2:variable}, ${3:variale});",
+			"                return _update${4:variable}(${2:variable}, ${3:variale});",
 			"            } catch (error) {",
 			"                throw new Meteor.Error(400, 'Algo deu errado, tente novamente.');",
 			"            }",
@@ -46,7 +46,7 @@
 			"            try {",
 			"                check(${2:variable}, String);",
 			"",
-			"                return _remove${1:name}(${2:variable});",
+			"                return _remove${3:variable}(${2:variable});",
 			"            } catch (error) {",
 			"                throw new Meteor.Error(400, 'Algo deu errado, tente novamente.');",
 			"            }",
@@ -70,7 +70,7 @@
 			"",
 			"Template.$TM_FILENAME_BASE.onRendered(function() {});",
 			"",
-			"Template.$TM_FILENAME_BASE.onDestroyed(function() {});",
+			"Template.$TM_FILENAME_BASE.onDestroyed(function() {});"
 		],
 		"description": "Generate blaze template functions"
 	}
