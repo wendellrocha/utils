@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class DrawerWidget extends StatefulWidget {
   @override
@@ -11,7 +13,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
     return Drawer(
       child: Column(
         children: [
-          UserAccountsDrawerHeader(
+          Container(
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: (MediaQuery.of(context).platformBrightness ==
@@ -21,23 +23,52 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 fit: BoxFit.cover,
               ),
             ),
-            accountName: Text(
-              'Wendell R.',
-              style: TextStyle(
-                color: Theme.of(context).primaryColor,
-              ),
-            ),
-            accountEmail: Text(
-              'wendellrocha@outlook.com',
-              style: TextStyle(
-                color: Theme.of(context).primaryColor,
-              ),
-            ),
-            currentAccountPicture: CircleAvatar(
-              radius: 30.0,
-              backgroundImage: NetworkImage(
-                  'https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/avatars/32/32d1275f6fc8d8005ef40d54fab41135aaf2a82d_full.jpg'),
-              backgroundColor: Colors.transparent,
+            child: Row(
+              children: [
+                Expanded(
+                  child: UserAccountsDrawerHeader(
+                    decoration: BoxDecoration(color: Colors.transparent),
+                    accountName: Text(
+                      'Wendell R.',
+                      style: TextStyle(
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    ),
+                    accountEmail: Text(
+                      'wendellrocha@outlook.com',
+                      style: TextStyle(
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    ),
+                    currentAccountPicture: GestureDetector(
+                      onTap: () {
+                        Modular.to.pushNamed('/perfil');
+                      },
+                      child: CircleAvatar(
+                        radius: 30.0,
+                        backgroundImage: NetworkImage('url'),
+                        backgroundColor: Colors.transparent,
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.all(16),
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(100),
+                    radius: 100,
+                    onTap: () {
+                      Navigator.pop(context);
+                      Modular.to.pushNamed('/perfil');
+                    },
+                    child: Icon(
+                      Icons.arrow_forward_ios,
+                      color: Theme.of(context).splashColor,
+                      size: 14,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
           Expanded(
@@ -47,40 +78,24 @@ class _DrawerWidgetState extends State<DrawerWidget> {
               children: <Widget>[
                 ListTile(
                   title: Text(
-                    'Início',
-                    style: TextStyle(
-                      color: Theme.of(context).primaryColor,
-                    ),
-                  ),
-                  leading: Icon(
-                    Icons.home,
-                    size: 20,
-                    color: Color(0XFF68696A),
-                  ),
-                  onTap: () {
-                    // Update the state of the app
-                    // ...
-                    // Then close the drawer
-                    Navigator.pop(context);
-                  },
-                ),
-                ListTile(
-                  title: Text(
                     'Notificações',
                     style: TextStyle(
                       color: Theme.of(context).primaryColor,
                     ),
                   ),
                   leading: Icon(
-                    Icons.notifications,
+                    Icons.ac_unit,
                     size: 20,
                     color: Color(0XFF68696A),
                   ),
+                  trailing: Icon(
+                    Icons.arrow_forward_ios,
+                    size: 14,
+                    color: Color(0XFF68696A),
+                  ),
                   onTap: () {
-                    // Update the state of the app
-                    // ...
-                    // Then close the drawer
                     Navigator.pop(context);
+                    Modular.to.pushNamed('/notificacoes');
                   },
                 ),
                 ListTile(
@@ -91,15 +106,18 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                     ),
                   ),
                   leading: Icon(
-                    Icons.monetization_on,
+                    Icons.ac_unit,
                     size: 20,
                     color: Color(0XFF68696A),
                   ),
+                  trailing: Icon(
+                    Icons.arrow_forward_ios,
+                    size: 14,
+                    color: Color(0XFF68696A),
+                  ),
                   onTap: () {
-                    // Update the state of the app
-                    // ...
-                    // Then close the drawer
                     Navigator.pop(context);
+                    Modular.to.pushNamed('/financeiro');
                   },
                 ),
                 ListTile(
@@ -110,15 +128,18 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                     ),
                   ),
                   leading: Icon(
-                    Icons.person,
+                    Icons.ac_unit,
                     size: 20,
                     color: Color(0XFF68696A),
                   ),
+                  trailing: Icon(
+                    Icons.arrow_forward_ios,
+                    size: 14,
+                    color: Color(0XFF68696A),
+                  ),
                   onTap: () {
-                    // Update the state of the app
-                    // ...
-                    // Then close the drawer
                     Navigator.pop(context);
+                    Modular.to.pushNamed('/dados-cadastrais');
                   },
                 ),
                 ListTile(
@@ -129,15 +150,18 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                     ),
                   ),
                   leading: Icon(
-                    Icons.access_alarm,
+                    Icons.ac_unit,
                     size: 20,
                     color: Color(0XFF68696A),
                   ),
+                  trailing: Icon(
+                    Icons.arrow_forward_ios,
+                    size: 14,
+                    color: Color(0XFF68696A),
+                  ),
                   onTap: () {
-                    // Update the state of the app
-                    // ...
-                    // Then close the drawer
                     Navigator.pop(context);
+                    Modular.to.pushNamed('/campanhas');
                   },
                 ),
                 ListTile(
@@ -148,15 +172,18 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                     ),
                   ),
                   leading: Icon(
-                    Icons.person,
+                    Icons.ac_unit,
                     size: 20,
                     color: Color(0XFF68696A),
                   ),
+                  trailing: Icon(
+                    Icons.arrow_forward_ios,
+                    size: 14,
+                    color: Color(0XFF68696A),
+                  ),
                   onTap: () {
-                    // Update the state of the app
-                    // ...
-                    // Then close the drawer
                     Navigator.pop(context);
+                    Modular.to.pushNamed('/validadores');
                   },
                 ),
                 ListTile(
@@ -167,15 +194,18 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                     ),
                   ),
                   leading: Icon(
-                    Icons.email,
+                    Icons.ac_unit,
                     size: 15,
                     color: Color(0XFF68696A),
                   ),
+                  trailing: Icon(
+                    Icons.arrow_forward_ios,
+                    size: 14,
+                    color: Color(0XFF68696A),
+                  ),
                   onTap: () {
-                    // Update the state of the app
-                    // ...
-                    // Then close the drawer
                     Navigator.pop(context);
+                    Modular.to.pushNamed('/contato');
                   },
                 ),
                 ListTile(
@@ -186,15 +216,18 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                     ),
                   ),
                   leading: Icon(
-                    Icons.picture_as_pdf,
+                    Icons.ac_unit,
                     size: 20,
                     color: Color(0XFF68696A),
                   ),
+                  trailing: Icon(
+                    Icons.arrow_forward_ios,
+                    size: 14,
+                    color: Color(0XFF68696A),
+                  ),
                   onTap: () {
-                    // Update the state of the app
-                    // ...
-                    // Then close the drawer
                     Navigator.pop(context);
+                    Modular.to.pushNamed('/termos');
                   },
                 ),
                 ListTile(
@@ -205,15 +238,18 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                     ),
                   ),
                   leading: Icon(
-                    Icons.info,
+                    Icons.ac_unit,
                     size: 20,
                     color: Color(0XFF68696A),
                   ),
+                  trailing: Icon(
+                    Icons.arrow_forward_ios,
+                    size: 14,
+                    color: Color(0XFF68696A),
+                  ),
                   onTap: () {
-                    // Update the state of the app
-                    // ...
-                    // Then close the drawer
                     Navigator.pop(context);
+                    Modular.to.pushNamed('/ajuda');
                   },
                 ),
                 ListTile(
@@ -224,15 +260,18 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                     ),
                   ),
                   leading: Icon(
-                    Icons.local_grocery_store,
+                    Icons.ac_unit,
                     size: 20,
                     color: Color(0XFF68696A),
                   ),
+                  trailing: Icon(
+                    Icons.arrow_forward_ios,
+                    size: 14,
+                    color: Color(0XFF68696A),
+                  ),
                   onTap: () {
-                    // Update the state of the app
-                    // ...
-                    // Then close the drawer
                     Navigator.pop(context);
+                    Modular.to.pushReplacementNamed('/acesso');
                   },
                 ),
               ],
