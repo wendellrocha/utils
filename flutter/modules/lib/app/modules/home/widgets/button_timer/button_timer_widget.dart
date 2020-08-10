@@ -15,6 +15,7 @@ class ButtonTimerWidget extends StatefulWidget {
   final TextStyle activeText;
   final TextStyle disabledText;
   final VoidCallback onPressed;
+  final String toastMessage;
 
   const ButtonTimerWidget({
     Key key,
@@ -25,6 +26,7 @@ class ButtonTimerWidget extends StatefulWidget {
     this.disabledColor,
     this.activeText,
     this.disabledText,
+    @required this.toastMessage,
   }) : super(key: key);
 
   @override
@@ -87,6 +89,9 @@ class _ButtonTimerWidgetState extends State<ButtonTimerWidget> {
     timer = widget.timeout;
     timeUpFlag = false;
     _timerUpdate();
+    Scaffold.of(context).showSnackBar(SnackBar(
+      content: Text(widget.toastMessage),
+    ));
   }
 
   @override
