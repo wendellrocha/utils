@@ -1,3 +1,4 @@
+import 'widgets/alert/alert_bloc.dart';
 import 'widgets/dropdown_button/dropdown_button_bloc.dart';
 import 'widgets/listview_horizontal/listview_horizontal_bloc.dart';
 import 'widgets/button_timer/button_timer_bloc.dart';
@@ -9,6 +10,7 @@ import 'home_page.dart';
 class HomeModule extends ChildModule {
   @override
   List<Bind> get binds => [
+        Bind((i) => AlertBloc()),
         Bind((i) => DropdownButtonBloc()),
         Bind((i) => ListviewHorizontalBloc()),
         Bind((i) => ButtonTimerBloc()),
