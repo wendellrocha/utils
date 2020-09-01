@@ -12,7 +12,6 @@ WORKDIR /home/developer
 
 # Install zsh
 RUN sh -c "$(wget -O- https://raw.githubusercontent.com/deluan/zsh-in-docker/master/zsh-in-docker.sh)" -- \
-    -t agnoster \
     -p git \
     -p ssh-agent \
     -p https://github.com/zsh-users/zsh-autosuggestions \
