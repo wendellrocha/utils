@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 
 class DropdownButtonWidget extends StatefulWidget {
+  final String label;
+  final List itens;
+  final Function onChanged;
+
+  const DropdownButtonWidget({Key key, this.label, this.itens, this.onChanged})
+      : super(key: key);
   @override
   _DropdownButtonWidgetState createState() => _DropdownButtonWidgetState();
 }
 
 class _DropdownButtonWidgetState extends State<DropdownButtonWidget> {
   String _selected;
-
-  final List<String> itens = ['cc_pf', 'cp_pf'];
 
   @override
   Widget build(BuildContext context) {
@@ -19,24 +23,27 @@ class _DropdownButtonWidgetState extends State<DropdownButtonWidget> {
         borderRadius: BorderRadius.circular(8),
       ),
       child: DropdownButton(
-        icon: Icon(Icons.arrow_drop_down, color: Theme.of(context).splashColor),
+        icon: Icon(
+          Icons.arrow_drop_down,
+          color: Theme.of(context).splashColor,
+        ),
         iconSize: 30,
         isExpanded: true,
         value: _selected,
         underline: SizedBox(),
         hint: Text(
-          'Selecione a categoria',
+          widget.label,
           style: TextStyle(
-            fontSize: 16,
+            color: Theme.of(context).primaryColor,
+            fontSize: 14,
           ),
         ),
         focusColor: Theme.of(context).primaryColor,
         onChanged: (String newValue) {
-          setState(() {
-            _selected = newValue;
-          });
+          setState(() => _selected = newValue);
+          widget.onChanged(newValue);
         },
-        items: itens.map<DropdownMenuItem<String>>((item) {
+        items: widget.itens.map<DropdownMenuItem<String>>((item) {
           return DropdownMenuItem<String>(
             child: new Text(
               item,
