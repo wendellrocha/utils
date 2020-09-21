@@ -21,6 +21,7 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  printing: ^3.6.1
   dio: ^3.0.9
   rxdart: ^0.24.1
   flutter_modular: ^1.3.2
