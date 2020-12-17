@@ -2,13 +2,14 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/wendell/.oh-my-zsh"
-export ANDROID_SDK_ROOT="/home/wendell/Android/sdk"
-export PATH="$PATH:/home/wendell/Android/sdk/platform-tools"
-export PATH="$PATH:/home/wendell/flutter/bin"
-export PATH="$PATH:/home/wendell/.pub-cache/bin"
+export ZSH="/home/wendellr/.oh-my-zsh"
+export ANDROID_HOME="/home/wendellr/Android/sdk"
+export PATH="$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$PATH"
+export PATH="$PATH:/home/wendellr/Android/sdk/platform-tools"
+export PATH="$PATH:/home/wendellr/flutter/bin"
+export PATH="$PATH:/home/wendellr/.pub-cache/bin"
 export PATH="$PATH:/usr/lib/dart/bin"
-export PATH="$PATH:/home/wendell/android-studio/bin"
+export PATH="$PATH:/home/wendellr/android-studio/bin"
 export PATH="$PATH:/opt/yarn-[version]/bin"
 export PATH="$PATH:`yarn global bin`"
 
