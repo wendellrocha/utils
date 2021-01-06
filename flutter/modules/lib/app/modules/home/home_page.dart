@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:modules/app/modules/home/widgets/drawer/drawer_widget.dart';
+import 'package:modules/app/modules/home/widgets/text_field/text_field_widget.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
+
+import 'widgets/button_solid/button_solid_widget.dart';
 
 class HomePage extends StatefulWidget {
   final String title;
@@ -47,10 +50,13 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         children: [
           Container(color: Colors.red),
+          SizedBox(height: 6),
+          TextFieldWidget(label: 'TextField', hint: 'TextField'),
+          SizedBox(height: 6),
           Expanded(
             child: ButtonSolidWidget('Imprimir', () {
               Printing.layoutPdf(onLayout: (PdfPageFormat format) {
-                return buildPdf(format, itemSelecionado);
+                return buildPdf(format, 'item');
               });
             }),
           ),
@@ -60,7 +66,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  buildPdf(PdfPageFormat format, PedidoModel item) {
+  buildPdf(PdfPageFormat format, item) {
     final pw.Document doc = pw.Document();
 
     doc.addPage(
