@@ -268,3 +268,99 @@ Meteor.publish('UsuariosFiltrados', function (id) {
         }
     }
 })
+
+Meteor.publish('PesquisaApp', function (coords, query) {
+    ReactiveAggregate(this, Loja, [
+        {
+            $match: {
+                $text: {
+                    $search: query,
+                    $caseSensitive: false
+                },
+                ativo: true
+            }
+        },
+        {
+            $lookup: {
+                from: 'area_atuacao',
+                pipeline: [
+                    {
+                        $match: {
+                            geometry: {
+                                $geoIntersects: {
+                                    $geometry: {
+                                        type: "Point",
+                                        coordinates: coords
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                as: 'area_atuacao'
+            }
+        },
+        {
+            $unwind: '$area_atuacao'
+        },
+        {
+            $lookup: {
+                from: 'loja_area_atuacao',
+                let: { id: '$area_atuacao._id' },
+                pipeline: [
+                    {
+                        $match: {
+                            $expr: {
+                                $and: [
+                                    { $eq: ['$id_area_atuacao', '$$id'] },
+                                    { $eq: ['$ativo', true] }
+                                ]
+                            }
+                        }
+                    }
+                ],
+                as: 'area'
+            }
+        },
+        {
+            $unwind: '$area'
+        },
+        {
+            $match: {
+                $expr: {
+                    $and: [
+                        { $eq: ['$_id', '$area.id_loja'] },
+                        { $eq: ['$aberta', true] },
+                        { $eq: ['$ativo', true] },
+                    ]
+                }
+            }
+        },
+        {
+            $project: {
+                _id: '$_id',
+                nome: '$nome',
+                slogan: '$slogan',
+                ativo: '$ativo',
+                endereco: '$endereco',
+                capa: '$capa',
+                logo: '$logo',
+                aberta: '$aberta',
+                taxa_entrega: '$area.taxa_entrega',
+                score: { $meta: "textScore" }
+            }
+        },
+        {
+            $match: {
+                score: { $gte: 1.0 }
+            }
+        },
+        {
+            $sort: {
+                score: -1
+            }
+        },
+    ], {
+        clientCollection: 'PesquisaApp'
+    });
+})
