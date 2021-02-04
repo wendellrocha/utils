@@ -1,0 +1,32 @@
+<application>
+  <component name="ProjectManager">
+    <defaultProject>
+      <component name="ProjectDictionaryState">
+        <dictionary name="wendellr" />
+      </component>
+      <component name="ProjectInspectionProfilesVisibleTreeState">
+        <entry key="Project Default">
+          <profile-state>
+            <expanded-state>
+              <State />
+            </expanded-state>
+            <selected-state>
+              <State>
+                <id>Proofreading</id>
+              </State>
+            </selected-state>
+          </profile-state>
+        </entry>
+      </component>
+      <component name="ProjectViewState">
+        <option name="autoscrollToSource" value="true" />
+        <option name="hideEmptyMiddlePackages" value="true" />
+        <option name="showLibraryContents" value="true" />
+      </component>
+      <component name="PropertiesComponent">
+        <property name="android.sdk.path" value="$USER_HOME$/Android/sdk" />
+        <property name="settings.editor.selected.configurable" value="Errors" />
+      </component>
+    </defaultProject>
+  </component>
+</application>
