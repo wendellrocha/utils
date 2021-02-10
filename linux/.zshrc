@@ -10,8 +10,6 @@ export PATH="$PATH:/home/wendellr/flutter/bin"
 export PATH="$PATH:/home/wendellr/.pub-cache/bin"
 export PATH="$PATH:/usr/lib/dart/bin"
 export PATH="$PATH:/home/wendellr/android-studio/bin"
-export PATH="$PATH:/opt/yarn-[version]/bin"
-export PATH="$PATH:`yarn global bin`"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
