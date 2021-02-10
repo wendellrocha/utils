@@ -27,17 +27,29 @@ unzip sdk-tools.zip && rm sdk-tools.zip
 
 mv tools ~/Android/sdk/tools
 cd ~/Android/sdk/tools/bin && yes | ./sdkmanager --licenses
-cd ~/Android/sdk/tools/bin && ./sdkmanager "build-tools;29.0.2" "patcher;v4" "platform-tools" "platforms;android-29" "sources;android-29"
+cd ~/Android/sdk/tools/bin && ./sdkmanager  "patcher;v4" "platform-tools" \
+    "platforms;android-30" \
+    "platforms;android-29" \
+    "platforms;android-28" \
+    "build-tools;30.0.2" \
+    "build-tools;30.0.0" \
+    "build-tools;29.0.3" \
+    "build-tools;29.0.2" \
+    "build-tools;29.0.1" \
+    "build-tools;29.0.0" \
+    "build-tools;28.0.3" \
+    "build-tools;28.0.2" \
+    "build-tools;28.0.1" \
+    "build-tools;28.0.0" \
+    "sources;android-30" \
+    "sources;android-29" \
+    "sources;android-28"
 
 cd ~
 curl https://install.meteor.com/ | sh
 
-git clone https://github.com/flutter/flutter.git
-
-flutter channel beta
-cd ~
-cd flutter
-git checkout 1.23.0-18.1.pre
-flutter doctor
-
+pub global activate fvm
 pub global activate slidy
+
+fvm use 1.23.0-18.1.pre --global
+fvm install 1.26.0-17.3.pre
