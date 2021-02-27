@@ -4,9 +4,10 @@ sudo dnf install \
 
 sudo dnf install \
   https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+  
+sudo dnf copr enable zawertun/kde
 
-sudo dnf check-update
-sudo dnf update -y
+sudo dnf update -y --refresh
 
 sudo dnf install java-1.8.0-openjdk.x86_64
 
@@ -64,6 +65,6 @@ pub global activate fvm
 pub global activate slidy
 
 fvm use 1.23.0-18.1.pre --global
-fvm install 1.26.0-17.3.pre
+fvm install beta
 
 wget https://raw.githubusercontent.com/wendellrocha/utils/master/linux/.zshrc
