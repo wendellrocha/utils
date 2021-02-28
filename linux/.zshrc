@@ -7,9 +7,9 @@ export ANDROID_HOME="/home/wendellr/Android/sdk"
 export PATH="$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$PATH"
 export PATH="$PATH:/home/wendellr/Android/sdk/platform-tools"
 export PATH="$PATH:/home/wendellr/fvm/default/bin"
+export PATH="$PATH:/home/wendellr/dart-sdk/bin"
 export PATH="$PATH:/home/wendellr/.pub-cache/bin"
-export PATH="$PATH:/usr/lib/dart/bin"
-export PATH="$PATH:/home/wendellr/android-studio/bin"
+
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
