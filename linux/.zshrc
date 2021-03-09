@@ -7,7 +7,6 @@ export ANDROID_HOME="/home/wendellr/Android/sdk"
 export PATH="$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$PATH"
 export PATH="$PATH:/home/wendellr/Android/sdk/platform-tools"
 export PATH="$PATH:/home/wendellr/fvm/default/bin"
-export PATH="$PATH:/home/wendellr/dart-sdk/bin"
 export PATH="$PATH:/home/wendellr/.pub-cache/bin"
 
 
