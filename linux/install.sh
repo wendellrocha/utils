@@ -13,11 +13,15 @@ sudo sh -c 'wget -qO- https://storage.googleapis.com/download.dartlang.org/linux
 
 sudo apt update
 
-sudo apt install -y curl git unzip xz-utils zip libglu1-mesa
+sudo apt install -y curl git unzip xz-utils zip libglu1-mesa zsh
 sudo apt install -y nodejs build-essential adoptopenjdk-8-hotspot
-sudo apt install -y mongodb-org-shell=4.4.2 mongodb-org-mongos=4.4.2 mongodb-org-tools=4.4.2 dart
+sudo apt install -y mongodb-org-shell mongodb-org-mongos mongodb-org-tools dart
 
 sudo update-alternatives --config java
+
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt"
+ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
 
 mkdir -p Android/sdk
 mkdir -p .android && touch .android/repositories.cfg
@@ -51,5 +55,7 @@ curl https://install.meteor.com/ | sh
 pub global activate fvm
 pub global activate slidy
 
-fvm use 1.23.0-18.1.pre --global
-fvm install 1.26.0-17.3.pre
+fvm use stable --global
+fvm install 1.23.0-18.1.pre
+
+wget https://raw.githubusercontent.com/wendellrocha/utils/master/linux/.zshrc
