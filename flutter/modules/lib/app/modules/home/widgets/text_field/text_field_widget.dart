@@ -1,99 +1,156 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class TextFieldWidget extends StatefulWidget {
-  final String label;
+  final Key key;
+  final TextEditingController controller;
+  final String title;
   final String hint;
-  final String initialValue;
-  final bool readyOnly;
   final bool expands;
   final int maxLines;
+  final Color containerColor;
+  final Color iconColor;
+  final IconData icon;
+  final TextAlign align;
+  final TextInputType inputType;
+  final bool isPassword;
+  final bool isSearch;
+  final double opacity;
+  final Color textColor;
   final Function onChanged;
-  final Function validator;
-  final TextEditingController controller;
-  final TextInputType keyboardType;
-  final List<TextInputFormatter> inputFormatters;
-
-  const TextFieldWidget(
-      {@required this.label,
-      @required this.hint,
-      this.initialValue,
-      this.readyOnly = false,
-      this.expands = false,
-      this.maxLines = 1,
-      this.onChanged,
-      this.validator,
-      this.controller,
-      this.keyboardType,
-      this.inputFormatters})
-      : assert(label != null),
-        assert(hint != null);
+  final Function callbackSearch;
+  final double fontSize;
+  final bool readyOnly;
+  const TextFieldWidget({
+    this.key,
+    @required this.controller,
+    @required this.title,
+    this.hint,
+    this.maxLines = 1,
+    this.expands = false,
+    this.icon,
+    this.align,
+    this.inputType = TextInputType.text,
+    this.isPassword = false,
+    this.isSearch = false,
+    this.opacity = 0.5,
+    this.containerColor = Colors.black,
+    this.iconColor = Colors.white,
+    this.textColor = Colors.white,
+    this.onChanged,
+    this.callbackSearch,
+    this.fontSize = 16,
+    this.readyOnly = false,
+  })  : assert(controller != null, 'Controller must not be null'),
+        assert(title != null, 'Title must not be null'),
+        super(key: key);
 
   @override
   _TextFieldWidgetState createState() => _TextFieldWidgetState();
 }
 
 class _TextFieldWidgetState extends State<TextFieldWidget> {
-  void initState() {
-    super.initState();
-    if (widget.controller != null) widget.controller.text = widget.initialValue;
-  }
+  bool isVisible = false;
+  bool isNotEmpty = false;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Theme.of(context).dividerColor,
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: TextFormField(
-        textAlignVertical: TextAlignVertical.top,
-        textAlign: TextAlign.start,
-        controller: widget.controller != null ? widget.controller : null,
-        initialValue: widget.controller == null ? widget.initialValue : null,
-        keyboardType: widget.keyboardType != null
-            ? widget.keyboardType
-            : TextInputType.text,
-        inputFormatters:
-            widget.inputFormatters != null ? widget.inputFormatters : [],
-        onChanged: (value) => widget.onChanged(value),
-        readOnly: widget.readyOnly,
-        expands: widget.expands,
-        maxLines: widget.expands ? null : widget.maxLines,
-        style: TextStyle(
-          fontSize: 14,
-          fontWeight: FontWeight.normal,
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(
+            Radius.circular(20),
+          ),
+          color: widget.containerColor.withOpacity(widget.opacity),
         ),
-        validator:
-            widget.validator != null ? (text) => widget.validator() : null,
-        decoration: InputDecoration(
-          alignLabelWithHint: true,
-          contentPadding: new EdgeInsets.symmetric(
-            vertical: 17,
-            horizontal: 16,
-          ),
-          labelText: widget.label,
-          hintText: widget.hint,
-          labelStyle: TextStyle(
-            color: Theme.of(context).primaryColor,
-            fontSize: 16,
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide(
-              color: Theme.of(context).primaryColor,
-              width: 1,
+        height: 60,
+        child: TextField(
+          textAlignVertical: TextAlignVertical.top,
+          textAlign: TextAlign.start,
+          keyboardType: widget.inputType,
+          obscureText: widget.isPassword ? !isVisible : false,
+          readOnly: widget.readyOnly,
+          controller: widget.controller,
+          cursorColor: widget.textColor,
+          expands: widget.expands,
+          maxLines: widget.expands ? null : widget.maxLines,
+          style: TextStyle(color: widget.textColor),
+          onChanged: (String value) => _onChanged(value),
+          decoration: InputDecoration(
+            alignLabelWithHint: true,
+            fillColor: Colors.white,
+            hoverColor: Colors.white,
+            focusColor: Colors.white,
+            suffixIcon: widget.isPassword
+                ? IconButton(
+                    icon: Icon(
+                      isVisible ? Icons.visibility : Icons.visibility_off,
+                      color: widget.textColor,
+                    ),
+                    onPressed: () => _toggle(),
+                  )
+                : widget.isSearch
+                    ? IconButton(
+                        icon: Icon(
+                          isNotEmpty ? Icons.clear : Icons.search,
+                          color: widget.iconColor,
+                        ),
+                        onPressed: () => _searchCalllback(),
+                      )
+                    : widget.icon != null
+                        ? Icon(widget.icon, color: widget.iconColor)
+                        : null,
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Theme.of(context).dividerColor,
+                width: 0.5,
+              ),
+              borderRadius: BorderRadius.all(
+                Radius.circular(20),
+              ),
             ),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide(
-              color: Theme.of(context).dividerColor,
-              width: 1,
+            border: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Theme.of(context).dividerColor,
+                width: 0.5,
+              ),
+              borderRadius: BorderRadius.all(
+                Radius.circular(20),
+              ),
+            ),
+            labelText: widget.title,
+            hintText: widget.hint,
+            labelStyle: TextStyle(
+              fontSize: widget.fontSize,
+              color: widget.textColor,
             ),
           ),
         ),
       ),
     );
+  }
+
+  _toggle() {
+    setState(() {
+      if (!mounted) return;
+      setState(() {
+        isVisible = !isVisible;
+      });
+    });
+  }
+
+  _searchCalllback() {
+    setState(() {
+      widget.controller.clear();
+      widget.callbackSearch();
+      isNotEmpty = false;
+    });
+  }
+
+  _onChanged(String value) {
+    setState(() {
+      isNotEmpty = true;
+    });
+    if (widget.onChanged != null) widget.onChanged(value);
   }
 }
